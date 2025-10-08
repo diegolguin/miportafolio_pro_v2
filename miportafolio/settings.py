@@ -16,6 +16,9 @@ ALLOWED_HOSTS = [
     "localhost",
     os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-83fc.up.railway.app"
+]
 
 
 # Cuando subas a Railway, se agregará automáticamente tu dominio del proyecto
