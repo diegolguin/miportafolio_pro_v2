@@ -7,7 +7,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-me')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["web-production-83fc.up.railway.app", "127.0.0.1", "localhost"]
+import os
+
+ALLOWED_HOSTS = [
+    "web-production-83fc.up.railway.app",
+    ".railway.app",
+    "127.0.0.1",
+    "localhost",
+    os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
+]
 
 
 # Cuando subas a Railway, se agregará automáticamente tu dominio del proyecto
