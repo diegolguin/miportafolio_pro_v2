@@ -1,0 +1,18 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg card-glass">
+      <div class="card-body p-4">
+        <h2 class="h4 text-center mb-3">Crear cuenta</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary w-100 btn-anim">Registrarme</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

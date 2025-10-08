@@ -1,0 +1,53 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Carrito{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5 fade-in">
+    <h2 class="fw-bold mb-4 text-white animate__animated animate__fadeInDown">🛒 Carrito</h2>
+
+    <div class="card shadow-lg border-0 rounded-4 p-4 mx-auto" style="max-width: 950px; background-color: rgba(255, 255, 255, 0.9);">
+        <div class="card-body">
+            {% if cart_items %}
+            <div class="table-responsive">
+                <table class="table align-middle table-hover text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                        <tr class="animate__animated animate__fadeIn">
+                            <td style="width: 100px;">
+                                <img src="{{ item.imagen }}" alt="{{ item.nombre }}" class="rounded shadow-sm" style="width: 80px; height: 80px; object-fit: cover;">
+                            </td>
+                            <td class="fw-semibold text-dark">{{ item.nombre }}</td>
+                            <td>{{ item.cantidad }}</td>
+                            <td class="text-success fw-bold">${{ item.precio|floatformat:0 }}</td>
+                            <td class="text-primary fw-bold">${{ item.subtotal|floatformat:0 }}</td>
+                            <td>
+                                <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm px-3">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <a href="{% url 'productos' %}" class="btn btn-secondary px-4">⬅ Seguir comprando</a>
+                <h4 class="fw-bold text-dark">Total: <span class="text-primary">${{ total|floatformat:0 }}</span></h4>
+            </div>
+            {% else %}
+            <p class="text-muted fs-5 mt-3">Tu carrito está vacío 🛍️</p>
+            <a href="{% url 'productos' %}" class="btn btn-primary mt-3">Ver productos</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

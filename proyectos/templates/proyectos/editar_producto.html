@@ -1,0 +1,18 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Producto{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg card-glass">
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary btn-anim" type="submit">Guardar</button>
+          <a href="{% url 'productos' %}" class="btn btn-outline-light btn-anim">Volver</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

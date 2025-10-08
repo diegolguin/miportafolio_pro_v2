@@ -1,0 +1,49 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<div class="container mt-4 fade-in">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-white">Productos</h2>
+    <div>
+      <a href="{% url 'carrito' %}" class="btn btn-warning me-2 shadow-sm fw-semibold">🛒 Ver carrito</a>
+      <a href="{% url 'agregar_producto' %}" class="btn btn-success shadow-sm fw-semibold">+ Agregar</a>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    {% for p in productos %}
+      <div class="col-md-4 col-sm-6">
+        <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden card-glass" style="background-color: rgba(255,255,255,0.92);">
+          
+          {% if p.imagen %}
+          <img src="{{ p.imagen }}" alt="{{ p.nombre }}" class="card-img-top" 
+               style="height: 220px; object-fit: cover; border-bottom: 3px solid #e0e0e0;">
+          {% else %}
+          <div class="bg-secondary text-white text-center py-5">Sin imagen</div>
+          {% endif %}
+
+          <div class="card-body d-flex flex-column text-dark">
+            <h5 class="card-title fw-bold">{{ p.nombre }}</h5>
+            <p class="card-text small flex-grow-1 text-muted">
+              {{ p.descripcion|default:"Sin descripción" }}
+            </p>
+            <p class="fw-bold fs-5 mb-3 text-dark">$ {{ p.precio|floatformat:0 }}</p>
+
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'add_to_cart' p.id %}" class="btn btn-primary w-75 shadow-sm">Agregar al carrito</a>
+              <a href="{% url 'editar_producto' p.id %}" class="btn btn-outline-secondary shadow-sm">Editar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-center text-light mt-5">
+        <p class="fs-5">No hay productos cargados aún 🛍️</p>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+[
+  {
+    "model": "proyectos.producto",
+    "pk": 1,
+    "fields": {
+      "nombre": "Audífonos Inalámbricos",
+      "descripcion": "Bluetooth 5.1, micrófono",
+      "precio": "25990.00",
+      "stock": 30,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Wireless_Headphones.jpg"
+    }
+  },
+  {
+    "model": "proyectos.producto",
+    "pk": 2,
+    "fields": {
+      "nombre": "Mouse Gamer RGB",
+      "descripcion": "8000 DPI, USB",
+      "precio": "12990.00",
+      "stock": 25,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Computer_mouse_glossy_01.jpg"
+    }
+  },
+  {
+    "model": "proyectos.producto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Parlante Bluetooth JBL GO 3",
+      "descripcion": "Sonido portátil, resistente al agua.",
+      "precio": "19990.00",
+      "stock": 20,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Bluetooth_speaker.jpg"
+    }
+  },
+  {
+    "model": "proyectos.producto",
+    "pk": 4,
+    "fields": {
+      "nombre": "Teclado Mecánico",
+      "descripcion": "Switch Blue, retroiluminado RGB",
+      "precio": "34990.00",
+      "stock": 15,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mechanical_keyboard_-_side_view.jpg"
+    }
+  },
+  {
+    "model": "proyectos.producto",
+    "pk": 5,
+    "fields": {
+      "nombre": "Smartwatch FitBand X",
+      "descripcion": "Monitoreo de ritmo cardíaco y pasos.",
+      "precio": "29990.00",
+      "stock": 18,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Smartwatch_on_a_white_background.jpg"
+    }
+  }
+]

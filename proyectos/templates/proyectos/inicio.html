@@ -1,0 +1,14 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<div class="text-center">
+  <h1 class="display-5 fw-bold mb-3">Bienvenido a Mi Portafolio</h1>
+  <p class="lead mb-4">Explora el sistema de ventas, clientes e inventario con un carrito de compras.</p>
+  {% if user.is_authenticated %}
+    <a href="{% url 'lista' %}" class="btn btn-primary btn-anim btn-lg">Ir a proyectos</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary btn-anim btn-lg me-2">Iniciar sesión</a>
+    <a href="{% url 'registro' %}" class="btn btn-outline-light btn-lg btn-anim">Crear cuenta</a>
+  {% endif %}
+</div>
+{% endblock %}

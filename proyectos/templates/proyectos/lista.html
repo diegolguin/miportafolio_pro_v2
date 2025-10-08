@@ -1,0 +1,20 @@
+{% extends 'proyectos/base.html' %}
+{% block title %}Lista de Proyectos{% endblock %}
+{% block content %}
+
+<div class="text-center mb-5">
+  <h1 class="fw-bold text-white">Lista de Proyectos</h1>
+  <p class="text-light">Selecciona un módulo para continuar</p>
+</div>
+
+<div class="d-grid gap-4 col-md-6 mx-auto">
+  {% for p in proyectos %}
+  <a href="{% url p.url %}" 
+     class="btn btn-primary btn-lg shadow rounded-pill fw-semibold text-uppercase py-3 animate__animated animate__pulse">
+     {{ p.nombre }}
+  </a>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
