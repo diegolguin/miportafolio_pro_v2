@@ -2,27 +2,36 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# ===============================
+# 📁 BASE DEL PROYECTO
+# ===============================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ===============================
+# 🔐 CONFIGURACIÓN DE SEGURIDAD
+# ===============================
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-me')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-import os
-
+# ===============================
+# 🌐 HOSTS PERMITIDOS Y CSRF
+# ===============================
 ALLOWED_HOSTS = [
     "web-production-83fc.up.railway.app",
-    ".railway.app",
+    ".up.railway.app",
     "127.0.0.1",
     "localhost",
     os.environ.get("RAILWAY_PUBLIC_DOMAIN", "")
 ]
+
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-83fc.up.railway.app"
+    "https://web-production-83fc.up.railway.app",
+    "https://*.up.railway.app"
 ]
 
-
-# Cuando subas a Railway, se agregará automáticamente tu dominio del proyecto
-
+# ===============================
+# 📦 APLICACIONES INSTALADAS
+# ===============================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,9 +42,12 @@ INSTALLED_APPS = [
     'proyectos',
 ]
 
+# ===============================
+# ⚙️ MIDDLEWARE
+# ===============================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Sirve archivos estáticos en producción
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Archivos estáticos en producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,6 +58,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'miportafolio.urls'
 
+# ===============================
+# 🧩 TEMPLATES
+# ===============================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -65,7 +80,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'miportafolio.wsgi.application'
 
 # ===============================
-# ⚙️ BASE DE DATOS
+# 💾 BASE DE DATOS
 # ===============================
 DATABASES = {
     'default': dj_database_url.config(
@@ -75,7 +90,7 @@ DATABASES = {
 }
 
 # ===============================
-# 🔐 VALIDACIÓN DE CONTRASEÑAS
+# 🔑 VALIDACIÓN DE CONTRASEÑAS
 # ===============================
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -93,18 +108,18 @@ USE_I18N = True
 USE_TZ = True
 
 # ===============================
-# 📁 ARCHIVOS ESTÁTICOS Y MEDIA
+# 🗂️ ARCHIVOS ESTÁTICOS Y MEDIA
 # ===============================
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'proyectos' / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # ✅ WhiteNoise optimizado
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ===============================
-# 🔑 AUTENTICACIÓN
+# 👥 AUTENTICACIÓN
 # ===============================
 LOGIN_REDIRECT_URL = 'lista'
 LOGOUT_REDIRECT_URL = 'login'
