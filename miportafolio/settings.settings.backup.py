@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ===============================
 # 🔐 CONFIGURACIÓN DE SEGURIDAD
 # ===============================
-SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme-in-env')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-me')
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # ===============================
 # 🌐 HOSTS PERMITIDOS Y CSRF
@@ -82,11 +82,10 @@ WSGI_APPLICATION = 'miportafolio.wsgi.application'
 # ===============================
 # 💾 BASE DE DATOS
 # ===============================
-
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
-        conn_max_age=600
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
     )
 }
 

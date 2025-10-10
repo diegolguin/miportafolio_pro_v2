@@ -1,0 +1,13 @@
+# Cambios aplicados automáticamente
+- Ajustado `settings.py` para:
+  - SECRET_KEY/DEBUG/ALLOWED_HOSTS desde variables de entorno.
+  - `CSRF_TRUSTED_ORIGINS` con dominios de Railway.
+  - WhiteNoise habilitado para archivos estáticos.
+  - `STATIC_URL`, `STATIC_ROOT`, `MEDIA_URL`, `MEDIA_ROOT` definidos.
+  - Base de datos via `dj_database_url` (usa `DATABASE_URL` en Railway, `sqlite` local por defecto).
+  - TEMPLATES con `BASE_DIR / 'templates'` (si aplica).
+- Generado `.env.example` con variables necesarias.
+- Confirmado `Procfile` para `gunicorn miportafolio.wsgi`.
+- Creado `runtime.txt` (Python 3.12.6).
+- README actualizado con guía paso a paso de despliegue en Railway.
+- Backup de `settings.py` guardado como `settings.settings.backup.py`.

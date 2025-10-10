@@ -1,4 +1,19 @@
 
+> ✅ **Despliegue en Railway (paso a paso)**
+1) Crea proyecto en Railway ➜ **New Project** ➜ **Deploy from GitHub** (conecta tu repo).
+2) **Plugins ➜ Add PostgreSQL** (Railway crea `DATABASE_URL` automáticamente).
+3) En **Variables** agrega:
+   - `DEBUG`=`False`
+   - `SECRET_KEY`=`(genera una secreta)`
+   - `ALLOWED_HOSTS`=`<tu-subdominio>.up.railway.app,localhost,127.0.0.1`
+4) En **Settings** asegúrate que el **Start Command** sea: `gunicorn miportafolio.wsgi` (Procfile ya lo define).
+5) **Deploy** y luego ejecuta en **Shell** (o desde CI) los comandos:
+   - `python manage.py migrate`
+   - `python manage.py collectstatic --noinput`
+6) Abre el **Public URL** y verifica que carga sin errores.
+
+
+
 # 🌐 Proyecto Portafolio Web - Django (Django 5.2.5)
 
 **Autor:** Diego Sandoval Olguín  
