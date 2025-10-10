@@ -88,10 +88,7 @@ python manage.py runserver
 6️⃣ Abrir en el navegador:
 👉 http://127.0.0.1:8000/
 
-👤 Contacto
-Autor: Diego Sandoval Olguín
-Carrera: Analista Programador
-Institución: INACAP
+
 
 🌍 Proyecto en Producción
 🔗 Sitio desplegado en Railway:
