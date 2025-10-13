@@ -1,18 +1,120 @@
-{% extends 'proyectos/base.html' %}
-{% block title %}Producto{% endblock %}
-{% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card shadow-lg card-glass">
-      <div class="card-body">
-        <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button class="btn btn-primary btn-anim" type="submit">Guardar</button>
-          <a href="{% url 'productos' %}" class="btn btn-outline-light btn-anim">Volver</a>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if form.instance.pk %}Editar{% else %}Agregar{% endif %} Producto</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f7fb;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+        button {
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .imagen-previa {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .imagen-previa img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        a.volver {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        a.volver:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if form.instance.pk %}Editar{% else %}Agregar{% endif %} Producto</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="imagen-previa">
+                {% if form.instance.imagen %}
+                    <img id="preview" src="{{ form.instance.imagen.url }}" alt="Imagen actual">
+                {% else %}
+                    <img id="preview" src="{% static 'img/no-image.png' %}" alt="Sin imagen">
+                {% endif %}
+            </div>
+
+            <button type="submit">💾 Guardar</button>
         </form>
-      </div>
+
+        <a href="{% url 'productos' %}" class="volver">⬅ Volver al listado</a>
     </div>
-  </div>
-</div>
-{% endblock %}
+
+    <script>
+        // 🖼️ Mostrar previsualización al seleccionar imagen
+        const inputFile = document.querySelector('input[type="file"]');
+        const preview = document.getElementById('preview');
+        if (inputFile) {
+            inputFile.addEventListener('change', () => {
+                const file = inputFile.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = e => preview.src = e.target.result;
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

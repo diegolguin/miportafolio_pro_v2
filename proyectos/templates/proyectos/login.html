@@ -1,19 +1,90 @@
-{% extends 'proyectos/base.html' %}
-{% block title %}Iniciar sesión{% endblock %}
-{% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-5">
-    <div class="card shadow-lg card-glass">
-      <div class="card-body p-4">
-        <h2 class="h4 text-center mb-3">Iniciar sesión</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #c0a4ff, #a3caff);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #ffffffcc;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar sesión</h2>
         <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary w-100 btn-anim">Entrar</button>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Entrar</button>
         </form>
-        <p class="mt-3 text-center"><a href="{% url 'registro' %}">Crear una cuenta</a></p>
-      </div>
+        <a href="{% url 'registrar_usuario' %}" class="link">Crear una cuenta</a>
     </div>
-  </div>
-</div>
-{% endblock %}
+</body>
+</html>

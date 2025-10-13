@@ -11,7 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 🔐 CONFIGURACIÓN DE SEGURIDAD
 # ===============================
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme-in-env')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
+
 
 # ===============================
 # 🌐 HOSTS PERMITIDOS Y CSRF
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'proyectos',
+    'rest_framework',
 ]
 
 # ===============================
@@ -127,3 +129,6 @@ LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
