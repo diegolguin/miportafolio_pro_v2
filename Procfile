@@ -1,2 +1,3 @@
-web: python manage.py migrate && gunicorn miportafolio.wsgi
+web: python railway_migrate.py && gunicorn miportafolio.wsgi
+
 
