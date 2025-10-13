@@ -1,4 +1,4 @@
-web: python railway_migrate.py && gunicorn miportafolio.wsgi
+web: python miportafolio/railway_migrate.py && gunicorn miportafolio.wsgi
 
 
 
