@@ -1,14 +1,6 @@
+from pathlib import Path
+import os
 import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
-        conn_max_age=600
-    )
-}
-
-# Si Railway requiere SSL (la mayoría de las veces sí)
-DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
 
 # ===============================
 # 📁 BASE DEL PROYECTO
@@ -19,8 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 🔐 CONFIGURACIÓN DE SEGURIDAD
 # ===============================
 SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme-in-env')
-DEBUG = True
-
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 # ===============================
 # 🌐 HOSTS PERMITIDOS Y CSRF
@@ -92,13 +83,16 @@ WSGI_APPLICATION = 'miportafolio.wsgi.application'
 # ===============================
 # 💾 BASE DE DATOS
 # ===============================
-
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///db.sqlite3',
         conn_max_age=600
     )
 }
+
+# ✅ Si Railway requiere SSL (lo usual)
+if DATABASES['default']['ENGINE'] != 'django.db.backends.sqlite3':
+    DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
 
 # ===============================
 # 🔑 VALIDACIÓN DE CONTRASEÑAS
@@ -136,7 +130,7 @@ LOGIN_REDIRECT_URL = 'lista'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
+# ===============================
+# ⚙️ CONFIGURACIÓN GENERAL
+# ===============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
