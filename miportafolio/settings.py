@@ -90,7 +90,7 @@ DATABASES = {
     )
 }
 
-# ✅ Si Railway requiere SSL (lo usual)
+# ✅ Railway requiere SSL casi siempre
 if DATABASES['default']['ENGINE'] != 'django.db.backends.sqlite3':
     DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
 
@@ -116,12 +116,23 @@ USE_TZ = True
 # 🗂️ ARCHIVOS ESTÁTICOS Y MEDIA
 # ===============================
 STATIC_URL = '/static/'
+
+# Archivos estáticos locales (CSS, JS, imágenes dentro del proyecto)
 STATICFILES_DIRS = [BASE_DIR / 'proyectos' / 'static']
+
+# Directorio donde Django recopila los archivos listos para producción
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Storage optimizado para producción con WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Archivos multimedia (imágenes subidas por usuarios)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# ✅ Garantiza que el directorio staticfiles exista (evita el warning)
+os.makedirs(STATIC_ROOT, exist_ok=True)
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
 # ===============================
 # 👥 AUTENTICACIÓN
