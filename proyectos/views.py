@@ -7,7 +7,7 @@ from django.urls import reverse
 from rest_framework import viewsets
 
 from .models import Cliente, Producto
-from .serializers import ProductoSerializer
+from .serializers import ProductoSerializer, ClienteSerializer
 from .forms import RegistroUsuarioForm, ClienteForm, ProductoForm
 from .cart import Cart
 
@@ -180,3 +180,31 @@ def remove_from_cart(request, id):
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+
+class ClienteViewSet(viewsets.ModelViewSet):
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def carrito_api(request):
+    """Devuelve los productos del carrito en formato JSON"""
+    cart = Cart(request)
+    data = []
+
+    for item in cart.items():  # 👈 usamos items() porque tu Cart lo maneja así
+        data.append({
+            'id': item['id'],
+            'nombre': item['name'],
+            'precio': float(item['price']),
+            'cantidad': item['qty'],
+            'subtotal': float(item['subtotal'])
+        })
+
+    total = float(cart.total())
+
+    return Response({
+        'items': data,
+        'total': total
+    })

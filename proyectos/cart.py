@@ -30,10 +30,22 @@ class Cart:
         self.session.modified = True
 
     def items(self):
+        """Devuelve los ítems del carrito (como lista iterable)."""
         for pid, item in self.cart.items():
             price = Decimal(item['price'])
-            yield {'id': pid, 'name': item['name'], 'price': price, 'qty': item['qty'], 'subtotal': price * item['qty']}
+            yield {
+                'id': pid,
+                'name': item['name'],
+                'price': price,
+                'qty': item['qty'],
+                'subtotal': price * item['qty']
+            }
 
     def total(self):
-        from decimal import Decimal
+        """Devuelve el total general del carrito."""
         return sum(Decimal(i['price']) * i['qty'] for i in self.cart.values())
+
+    # 👇 ESTA FUNCIÓN ES LA CLAVE para que el carrito sea iterable
+    def __iter__(self):
+        for item in self.items():
+            yield item

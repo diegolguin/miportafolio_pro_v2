@@ -85,10 +85,16 @@ WSGI_APPLICATION = 'miportafolio.wsgi.application'
 # 💾 BASE DE DATOS
 # ===============================
 
+# ===============================
+# 💾 BASE DE DATOS (Railway o local)
+# ===============================
+import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
-        conn_max_age=600
+        default='sqlite:///db.sqlite3',  # Usará esta si no hay DATABASE_URL
+        conn_max_age=600,
+        ssl_require=False  # Evita problemas de SSL en Railway
     )
 }
 

@@ -1,13 +1,13 @@
-from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from rest_framework import routers
 from . import views
-from .views import ProductoViewSet
+from .views import ProductoViewSet, ClienteViewSet
 
-# Router para la API REST
+# 🔹 Configurar router REST Framework
 router = routers.DefaultRouter()
-router.register(r'productos', ProductoViewSet)  # 👈 Prefijo limpio
+router.register(r'productos', ProductoViewSet, basename='producto')
+router.register(r'clientes', ClienteViewSet, basename='cliente')
 
 urlpatterns = [
     # Páginas principales
@@ -24,8 +24,8 @@ urlpatterns = [
     path('productos/agregar/', views.agregar_producto, name='agregar_producto'),
     path('productos/<int:id>/editar/', views.editar_producto, name='editar_producto'),
     path('productos/<int:id>/eliminar/', views.eliminar_producto, name='eliminar_producto'),
-    path('productos/<int:id>/', views.detalle_producto, name='detalle_producto'),  # 👈 al final siempre
-    path('registro/', views.registrar_usuario, name='registrar_usuario'),
+    path('productos/<int:id>/', views.detalle_producto, name='detalle_producto'),
+
     # Clientes
     path('clientes/', views.lista_clientes, name='lista_clientes'),
     path('clientes/agregar/', views.agregar_cliente, name='agregar_cliente'),
@@ -36,8 +36,8 @@ urlpatterns = [
     path('carrito/', views.carrito, name='carrito'),
     path('carrito/add/<int:id>/', views.add_to_cart, name='add_to_cart'),
     path('carrito/remove/<int:id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('api/carrito/', views.carrito_api, name='carrito_api'),
 
-    # API REST
-    path('api/', include(router.urls)),  # 👈 más ordenado, evita conflictos
+    # 🔹 Rutas de API REST
+    path('api/', include(router.urls)),
 ]
-
