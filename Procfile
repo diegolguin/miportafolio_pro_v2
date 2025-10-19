@@ -1,4 +1,6 @@
-web: python manage.py migrate && gunicorn miportafolio.wsgi
+release: python manage.py migrate
+web: gunicorn miportafolio.wsgi
+
 
 
 
